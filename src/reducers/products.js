@@ -1,11 +1,12 @@
 import { FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_FAILURE } from '../constants/ActionTypes'
+import FilterTypes from '../constants/FilterTypes'
 
 const initialState = {
    products: [],
    error: false
 } 
 
-const products = (state = initialState, action) => {
+const productReducer = (state = initialState, action) => {
    switch (action.type) {
       case FETCH_PRODUCTS_SUCCESS:
          return {
@@ -22,4 +23,14 @@ const products = (state = initialState, action) => {
    }
 }
 
-export default products;
+export default productReducer;
+
+export const getFilteredProducts = (state, filter) => {
+   if(filter === FilterTypes.ALL_CATEGORIES) {
+      return state;
+   } else {
+      return state.filter((product) => (
+         product.category === filter
+      ))
+   }
+}
