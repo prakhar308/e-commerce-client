@@ -6,7 +6,8 @@ import {
    START_CART_OPERATION,
    ADD_TO_CART_SUCCESS,
    CART_OPERATION_FAIL,
-   UPDATE_CART_SUCCESS
+   UPDATE_CART_SUCCESS,
+   REMOVE_CART_SUCCESS
 } from '../constants/ActionTypes'
 
 export const fetchProductsSuccess = (products) => ({
@@ -54,6 +55,11 @@ export const updateCartSuccess = (productId, qty) => ({
    qty 
 })
 
+export const removeCartSuccess = (productId) => ({
+   type: REMOVE_CART_SUCCESS,
+   productId
+})
+
 export const cartOperationFail = error => ({
    type: CART_OPERATION_FAIL,
    error
@@ -91,4 +97,20 @@ export const updateCart = (productId, qty) => {
    }
 }
 
+export const removeFromCart = (productId) => {
+   return async function (dispatch) {
+      try {
+         // set loading to true
+         dispatch(startCartOperation())
+         // send api request to remove the product
+         // from cart using it's id
+         await axios.put("/api/cart/remove", { productId })
+         // now remove product from redux cart
+         dispatch(removeCartSuccess(productId)) 
+      } catch (e) {
+         // set error
+         dispatch(cartOperationFail(e.message))
+      }
+   }
+}
 

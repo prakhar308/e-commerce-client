@@ -2,6 +2,7 @@ import {
    START_CART_OPERATION,
    ADD_TO_CART_SUCCESS,
    UPDATE_CART_SUCCESS,
+   REMOVE_CART_SUCCESS,
    CART_OPERATION_FAIL,
 } from '../constants/ActionTypes'
 
@@ -31,6 +32,13 @@ const cartReducer = (state = initialState, action) => {
                product._id === action.productId
                ? {...product, qty: action.qty}
                : product
+            ))
+         }
+      case REMOVE_CART_SUCCESS:
+         return {
+            ...state,
+            cart: state.cart.filter(product => (
+               product._id !== action.productId
             ))
          }
       case CART_OPERATION_FAIL:
