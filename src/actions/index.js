@@ -6,6 +6,7 @@ import {
    START_CART_OPERATION,
    ADD_TO_CART_SUCCESS,
    CART_OPERATION_FAIL,
+   UPDATE_CART_SUCCESS
 } from '../constants/ActionTypes'
 
 export const fetchProductsSuccess = (products) => ({
@@ -47,6 +48,12 @@ export const addToCartSuccess = (product) => ({
    product
 })
 
+export const updateCartSuccess = (productId, qty) => ({
+   type: UPDATE_CART_SUCCESS,
+   productId,
+   qty 
+})
+
 export const cartOperationFail = error => ({
    type: CART_OPERATION_FAIL,
    error
@@ -55,15 +62,33 @@ export const cartOperationFail = error => ({
 export const addToCart = (productId, qty) => {
    return async function(dispatch) {
       try {
+         // set loading to true
          dispatch(startCartOperation())
+         // send api request
          let product = await axios.post("/api/cart/add",{productId, qty});
+         // add product to cart in redux store
          dispatch(addToCartSuccess(product.data))
       } catch (e) {
+         // set error
          dispatch(cartOperationFail(e.message))
       } 
    }
 }
 
-
+export const updateCart = (productId, qty) => {
+   return async function(dispatch) {
+      try {
+         // set loading to true
+         dispatch(startCartOperation())
+         // send api request to update cart
+         await axios.put("/api/cart/update", {productId, qty})
+         // update qty of product inside the cart of the redux store
+         dispatch(updateCartSuccess(productId, qty))
+      } catch (e) {
+         // set error
+         dispatch(cartOperationFail(e.message))
+      }
+   }
+}
 
 

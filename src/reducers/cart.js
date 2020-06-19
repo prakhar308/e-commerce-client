@@ -1,7 +1,8 @@
 import {
    START_CART_OPERATION,
    ADD_TO_CART_SUCCESS,
-   CART_OPERATION_FAIL
+   UPDATE_CART_SUCCESS,
+   CART_OPERATION_FAIL,
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -22,6 +23,15 @@ const cartReducer = (state = initialState, action) => {
             ...state,
             cart: [...state.cart, action.product],
             loading: false
+         }
+      case UPDATE_CART_SUCCESS:
+         return {
+            ...state,
+            cart: state.cart.map((product) => (
+               product._id === action.productId
+               ? {...product, qty: action.qty}
+               : product
+            ))
          }
       case CART_OPERATION_FAIL:
          return {
