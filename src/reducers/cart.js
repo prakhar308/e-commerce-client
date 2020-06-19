@@ -4,6 +4,7 @@ import {
    UPDATE_CART_SUCCESS,
    REMOVE_CART_SUCCESS,
    CART_OPERATION_FAIL,
+   FETCH_CART_SUCCESS,
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -18,6 +19,11 @@ const cartReducer = (state = initialState, action) => {
          return {
             ...state,
             loading: true
+         }
+      case FETCH_CART_SUCCESS:
+         return {
+            ...state,
+            cart: action.cart
          }
       case ADD_TO_CART_SUCCESS:
          return {
