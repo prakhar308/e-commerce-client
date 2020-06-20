@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import productReducer, * as fromProducts from './products';
 import productFilterReducer from './productFilter';
-import cartReducer from './cart'
+import cartReducer, * as fromCart from './cart'
 
 export default combineReducers({
    products: productReducer,
@@ -11,4 +11,8 @@ export default combineReducers({
 
 export const getFilteredProducts = (state, filter) => {
    return fromProducts.getFilteredProducts(state.products.products, filter)
+}
+
+export const getProductQuantity = (state, productId) => {
+   return fromCart.getProductQuantity(state.cart.cart, productId);
 }

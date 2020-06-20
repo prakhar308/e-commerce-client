@@ -4,7 +4,10 @@ const Product = ({
    name,
    price,
    img,
-   description
+   description,
+   cartQty,
+   onAddToCart,
+   onUpdateCart
 }) => {
    return (
       <div>
@@ -12,6 +15,16 @@ const Product = ({
          <h3>{name}</h3>
          <h4>{price}</h4>
          <p>{description}</p>
+         {
+            cartQty === 0
+               ? <button
+                     onClick={onAddToCart}>Add To Cart</button>
+               : <div>
+                     <button onClick={() => onUpdateCart(cartQty-1)}>-</button>
+                     <button>{cartQty}</button>
+                     <button onClick={() => onUpdateCart(cartQty+1)}>+</button>
+                 </div>
+         }
          <hr/>
       </div>
    )

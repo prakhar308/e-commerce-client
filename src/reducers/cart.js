@@ -57,5 +57,13 @@ const cartReducer = (state = initialState, action) => {
    }
 }
 
+export const getProductQuantity = (state, productId) => {
+   const foundProduct = state.find((prod) => prod._id === productId)
+   
+   if(foundProduct)
+      return foundProduct.qty;
+   else
+      return 0;
+}
 
 export default cartReducer;
