@@ -23,7 +23,8 @@ const cartReducer = (state = initialState, action) => {
       case FETCH_CART_SUCCESS:
          return {
             ...state,
-            cart: action.cart
+            cart: action.cart,
+            loading: false
          }
       case ADD_TO_CART_SUCCESS:
          return {
@@ -38,19 +39,22 @@ const cartReducer = (state = initialState, action) => {
                product._id === action.productId
                ? {...product, qty: action.qty}
                : product
-            ))
+            )),
+            loading: false
          }
       case REMOVE_CART_SUCCESS:
          return {
             ...state,
             cart: state.cart.filter(product => (
                product._id !== action.productId
-            ))
+            )),
+            loading: false
          }
       case CART_OPERATION_FAIL:
          return {
             ...state,
-            error: action.error
+            error: action.error,
+            loading: false
          }
       default:
          return state;
