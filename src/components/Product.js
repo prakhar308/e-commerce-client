@@ -7,8 +7,15 @@ const Product = ({
    description,
    cartQty,
    onAddToCart,
-   onUpdateCart
+   onUpdateCart,
+   onRemoveCart
 }) => {
+   let update;
+   if(cartQty === 1)
+      update = () => onRemoveCart()
+   else
+      update = () => onUpdateCart(cartQty-1);
+
    return (
       <div>
          <img src={img} alt="product_image"/>
@@ -20,7 +27,7 @@ const Product = ({
                ? <button
                      onClick={onAddToCart}>Add To Cart</button>
                : <div>
-                     <button onClick={() => onUpdateCart(cartQty-1)}>-</button>
+                     <button onClick={update}>-</button>
                      <button>{cartQty}</button>
                      <button onClick={() => onUpdateCart(cartQty+1)}>+</button>
                  </div>

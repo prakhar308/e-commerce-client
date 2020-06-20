@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchProducts, addToCart, updateCart} from '../actions/'
+import { fetchProducts, addToCart, updateCart, removeFromCart } from '../actions/'
 import { getFilteredProducts, getProductQuantity } from '../reducers/'
 import Product from '../components/Product'
 
@@ -19,8 +19,9 @@ class Products extends Component {
                key={prod._id}
                {...prod}
                cartQty={this.props.getProductQuantity(prod._id)}
-               onAddToCart={() => this.props.onAddToCart(prod._id, 1)}
-               onUpdateCart={(e) => this.props.onUpdateCart(prod._id, e)}
+               onAddToCart={() => this.props.addToCart(prod._id, 1)}
+               onUpdateCart={(e) => this.props.updateCart(prod._id, e)}
+               onRemoveCart={() => this.props.removeFromCart(prod._id)}
             />
          ))
       }
@@ -37,8 +38,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
    fetchProducts: () => dispatch(fetchProducts()),
-   onAddToCart: (productId, qty) => dispatch(addToCart(productId, qty)),
-   onUpdateCart: (productId, qty) => dispatch(updateCart(productId, qty)),
+   addToCart: (productId, qty) => dispatch(addToCart(productId, qty)),
+   updateCart: (productId, qty) => dispatch(updateCart(productId, qty)),
+   removeFromCart: (productId) => dispatch(removeFromCart(productId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
