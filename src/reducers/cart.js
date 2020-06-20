@@ -13,51 +13,56 @@ const initialState = {
    error: null
 }
 
+const startCartOperation = (state, action) => ({
+   ...state,
+   loading: true
+})
+
+const fetchCart = (state, action) => ({
+   ...state,
+   cart: action.cart,
+   loading: false
+})
+
+const addToCart = (state, action) => ({
+   ...state,
+   cart: [...state.cart, action.product],
+   loading: false
+})
+
+const updateCart = (state, action) => ({
+   ...state,
+   cart: state.cart.map((product) => (
+      product._id === action.productId
+      ? {...product, qty: action.qty}
+      : product
+   )),
+   loading: false
+})
+
+const removeCart = (state, action) => ({
+   ...state,
+   cart: state.cart.filter(product => (
+      product._id !== action.productId
+   )),
+   loading: false
+})
+
+const cartOperationFail = (state, action) => ({
+   ...state,
+   error: action.error,
+   loading: false
+})
+
 const cartReducer = (state = initialState, action) => {
    switch (action.type) {
-      case START_CART_OPERATION:
-         return {
-            ...state,
-            loading: true
-         }
-      case FETCH_CART_SUCCESS:
-         return {
-            ...state,
-            cart: action.cart,
-            loading: false
-         }
-      case ADD_TO_CART_SUCCESS:
-         return {
-            ...state,
-            cart: [...state.cart, action.product],
-            loading: false
-         }
-      case UPDATE_CART_SUCCESS:
-         return {
-            ...state,
-            cart: state.cart.map((product) => (
-               product._id === action.productId
-               ? {...product, qty: action.qty}
-               : product
-            )),
-            loading: false
-         }
-      case REMOVE_CART_SUCCESS:
-         return {
-            ...state,
-            cart: state.cart.filter(product => (
-               product._id !== action.productId
-            )),
-            loading: false
-         }
-      case CART_OPERATION_FAIL:
-         return {
-            ...state,
-            error: action.error,
-            loading: false
-         }
-      default:
-         return state;
+      case START_CART_OPERATION: return startCartOperation(state, action)
+      case FETCH_CART_SUCCESS: return fetchCart(state, action)
+      case ADD_TO_CART_SUCCESS: return addToCart(state, action)
+      case UPDATE_CART_SUCCESS: return updateCart(state, action) 
+      case REMOVE_CART_SUCCESS: return removeCart(state, action)
+      case CART_OPERATION_FAIL: return cartOperationFail(state, action)
+      default: return state;
    }
 }
 
