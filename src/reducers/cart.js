@@ -5,6 +5,7 @@ import {
    REMOVE_CART_SUCCESS,
    CART_OPERATION_FAIL,
    FETCH_CART_SUCCESS,
+   CLEAR_CART_SUCCESS,
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -48,6 +49,12 @@ const removeCart = (state, action) => ({
    loading: false
 })
 
+const clearCart = (state, action) => ({
+   ...state,
+   cart: [],
+   loading: false
+})
+
 const cartOperationFail = (state, action) => ({
    ...state,
    error: action.error,
@@ -61,6 +68,7 @@ const cartReducer = (state = initialState, action) => {
       case ADD_TO_CART_SUCCESS: return addToCart(state, action)
       case UPDATE_CART_SUCCESS: return updateCart(state, action) 
       case REMOVE_CART_SUCCESS: return removeCart(state, action)
+      case CLEAR_CART_SUCCESS: return clearCart(state, action)
       case CART_OPERATION_FAIL: return cartOperationFail(state, action)
       default: return state;
    }
