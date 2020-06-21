@@ -10,6 +10,7 @@ import {
 
 const initialState = {
    cart: [],
+   totalPrice: 0,
    loading: false,
    error: null
 }
@@ -22,13 +23,15 @@ const startCartOperation = (state, action) => ({
 const fetchCart = (state, action) => ({
    ...state,
    cart: action.cart,
-   loading: false
+   loading: false,
+   totalPrice: calculateTotalPrice(state, action),
 })
 
 const addToCart = (state, action) => ({
    ...state,
    cart: [...state.cart, action.product],
-   loading: false
+   loading: false,
+   totalPrice: calculateTotalPrice(state, action)
 })
 
 const updateCart = (state, action) => ({
@@ -38,7 +41,8 @@ const updateCart = (state, action) => ({
       ? {...product, qty: action.qty}
       : product
    )),
-   loading: false
+   loading: false,
+   totalPrice: calculateTotalPrice(state, action)
 })
 
 const removeCart = (state, action) => ({
@@ -46,13 +50,15 @@ const removeCart = (state, action) => ({
    cart: state.cart.filter(product => (
       product._id !== action.productId
    )),
-   loading: false
+   loading: false,
+   totalPrice: calculateTotalPrice(state, action)
 })
 
 const clearCart = (state, action) => ({
    ...state,
    cart: [],
-   loading: false
+   loading: false,
+   totalPrice: 0
 })
 
 const cartOperationFail = (state, action) => ({
@@ -60,6 +66,40 @@ const cartOperationFail = (state, action) => ({
    error: action.error,
    loading: false
 })
+
+// calculate total price of cart depending upon the action performed
+const calculateTotalPrice = (state, action) => {
+   switch (action.type) {
+      
+      case FETCH_CART_SUCCESS:
+         return action.cart.reduce((total, item) => (
+            total + item.price * item.qty 
+         ), 0)
+
+      case ADD_TO_CART_SUCCESS:
+         return state.totalPrice + action.product.price * action.product.qty
+      
+      case UPDATE_CART_SUCCESS:
+         return state.cart.reduce((total, item) => {
+            if(item._id === action.productId){
+               return total + action.qty * item.price
+            } else {
+               return total + item.qty * item.price
+            }
+         }, 0)
+
+      case REMOVE_CART_SUCCESS:
+         return state.cart.reduce((total, item) => {
+            if(item._id !== action.productId)
+               return total + item.price * item.qty
+            else
+               return total
+         }, 0)
+      
+      default:
+         return 0;
+   }
+}
 
 const cartReducer = (state = initialState, action) => {
    switch (action.type) {

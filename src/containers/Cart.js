@@ -16,7 +16,7 @@ class Cart extends Component {
    }
 
    render() {
-      const { cartItems, loading, error } = this.props 
+      const { cartItems, loading, error, totalPrice } = this.props 
 
       const isEmpty = cartItems.length === 0
       const cart = (
@@ -36,12 +36,17 @@ class Cart extends Component {
             <p>You have {cartItems.length}
                {cartItems.length === 1 ? ' item' : ' items'} in cart
             </p>
-            <button onClick={this.props.clearCart}>Clear Shopping Cart</button>
+            <button
+               disabled={cartItems.length === 0 ? true: false}
+               onClick={this.props.clearCart}>
+               Clear Shopping Cart
+            </button>
             {
                isEmpty
                   ? (loading ? <h1>Loading...</h1> : <h1>Wow so empty</h1>)
                   : cart
             }
+            <p>Total price: <strong>{totalPrice}</strong></p>
          </div>
       )
    }
@@ -51,6 +56,7 @@ const mapStateToProps = state => ({
    cartItems: state.cart.cart,
    loading: state.cart.loading,
    error: state.cart.error,
+   totalPrice: state.cart.totalPrice,
 })
 
 const mapDispatchToProps = dispatch => ({
