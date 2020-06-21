@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import CartItem from '../components/CartItem';
-import { fetchCart, addToCart, updateCart, removeFromCart } from '../actions/'
+import {
+   fetchCart,
+   addToCart,
+   updateCart,
+   removeFromCart,
+   clearCart 
+} from '../actions/'
 
 class Cart extends Component {
    componentDidMount() {
@@ -30,6 +36,7 @@ class Cart extends Component {
             <p>You have {cartItems.length}
                {cartItems.length === 1 ? ' item' : ' items'} in cart
             </p>
+            <button onClick={this.props.clearCart}>Clear Shopping Cart</button>
             {
                isEmpty
                   ? (loading ? <h1>Loading...</h1> : <h1>Wow so empty</h1>)
@@ -51,6 +58,7 @@ const mapDispatchToProps = dispatch => ({
    addToCart: (productId, qty) => dispatch(addToCart(productId, qty)),
    updateCart: (productId, qty) => dispatch(updateCart(productId, qty)),
    removeFromCart: (productId) => dispatch(removeFromCart(productId)),
+   clearCart: () => dispatch(clearCart()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
