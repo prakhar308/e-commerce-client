@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchProducts, addToCart, updateCart, removeFromCart } from '../actions/'
+import { fetchProducts, addToCart, updateCart, removeFromCart, fetchCart } from '../actions/'
 import { getFilteredProducts, getProductQuantity } from '../reducers/'
 import Product from '../components/Product'
 
 class Products extends Component {
    componentDidMount() {
+      this.props.fetchCart();
       this.props.fetchProducts();
    }
 
@@ -41,6 +42,7 @@ const mapDispatchToProps = dispatch => ({
    addToCart: (productId, qty) => dispatch(addToCart(productId, qty)),
    updateCart: (productId, qty) => dispatch(updateCart(productId, qty)),
    removeFromCart: (productId) => dispatch(removeFromCart(productId)),
+   fetchCart: () => dispatch(fetchCart())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
