@@ -19,7 +19,7 @@ const CartOperationsButton = ({
                onClick={onAddToCart}>Add To Cart</button>
          : <div>
                <button onClick={update}>-</button>
-               <button>{qty}</button>
+               <button>{qty} in Cart</button>
                <button onClick={() => onUpdateCart(qty+1)}>+</button>
            </div>
    )
