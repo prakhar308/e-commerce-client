@@ -8,7 +8,7 @@ import Cart from '../containers/Cart'
 const App = (props) => {
    return (
       <div>
-         <Link to="/" exact>Home</Link>
+         <Link to="/">Home</Link>
          {' '}
          <Link to="/cart">Cart</Link>
          <Switch>
