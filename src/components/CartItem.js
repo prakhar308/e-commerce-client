@@ -13,7 +13,8 @@ const CartItem = ({
    return (
       <div>
          <img src={img}></img>
-         <h3>{name}</h3>
+         <h2>{name}</h2>
+         <h3>{price}</h3>
          <CartOperationsButton
             qty={qty}
             onAddToCart={onAddToCart}
