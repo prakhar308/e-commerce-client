@@ -1,4 +1,5 @@
 import React from 'react';
+import CartOperationsButton from './CartOperationsButton'
 
 const Product = ({
    name,
@@ -10,28 +11,17 @@ const Product = ({
    onUpdateCart,
    onRemoveCart
 }) => {
-   let update;
-   if(cartQty === 1)
-      update = () => onRemoveCart()
-   else
-      update = () => onUpdateCart(cartQty-1);
-
    return (
       <div>
          <img src={img} alt="product_image"/>
          <h3>{name}</h3>
          <h4>{price}</h4>
          <p>{description}</p>
-         {
-            cartQty === 0
-               ? <button
-                     onClick={onAddToCart}>Add To Cart</button>
-               : <div>
-                     <button onClick={update}>-</button>
-                     <button>{cartQty}</button>
-                     <button onClick={() => onUpdateCart(cartQty+1)}>+</button>
-                 </div>
-         }
+         <CartOperationsButton 
+            qty={cartQty}
+            onAddToCart={onAddToCart}
+            onUpdateCart={onUpdateCart}
+            onRemoveCart={onRemoveCart}/>  
          <hr/>
       </div>
    )
