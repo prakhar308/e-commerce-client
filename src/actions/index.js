@@ -212,3 +212,19 @@ export const auth = (email, password, isLogin, name) => {
       }
    }
 }
+
+export const tryAutoSignin = () => {
+   console.log("dmv dvv");
+   return function (dispatch) {
+      const token = localStorage.getItem('jwtToken');
+      const name = localStorage.getItem('name');
+      const email = localStorage.getItem('email');
+      if (token) {
+         // set token in Authorization header so that it can be used
+         // for sending further requests
+         setAuthorizationHeader(token)
+         console.log("dkvfv")
+         dispatch(authSuccess({name, email}))         
+      }
+   }
+}
