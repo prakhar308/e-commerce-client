@@ -10,6 +10,9 @@ import {
    REMOVE_CART_SUCCESS,
    FETCH_CART_SUCCESS,
    CLEAR_CART_SUCCESS,
+   START_AUTH,
+   AUTH_SUCCESS,
+   AUTH_FAIL
 } from '../constants/ActionTypes'
 
 export const fetchProductsSuccess = (products) => ({
@@ -151,6 +154,49 @@ export const clearCart = () => {
          dispatch(clearCartSuccess());
       } catch (e) {
          dispatch(cartOperationFail(e.message))
+      }
+   }
+}
+
+// ===============================
+// AUTH ACTIONS
+
+export const startAuth = () => ({
+   type: START_AUTH,
+})
+
+export const authSuccess = (user) => ({
+   type: AUTH_SUCCESS,
+   user,
+})
+
+export const authFail = (error) => ({
+   type: AUTH_FAIL,
+   error
+})
+
+export const auth = (email, password, isLogin, name) => {
+   return async function (dispatch) {
+      try {
+         // set loading to true
+         dispatch(startAuth());
+         let url = "/api/users/login"
+         let data = { email, password }
+         // check if login or signup
+         // if not login then
+         if (!isLogin) {
+            url = "/api/users"
+            data = {...data, name }
+         }
+         // send api request for authentication 
+         let user = await axios.post(url, data);
+         const { token, ...userDetails } = user.data;
+         // store token in LocalStorage
+         localStorage.setItem("jwtToken", token);
+         // set current user in store
+         dispatch(authSuccess(userDetails))
+      } catch (e) {
+         dispatch(authFail(e))
       }
    }
 }

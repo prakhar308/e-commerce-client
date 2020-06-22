@@ -2,11 +2,13 @@ import { combineReducers } from 'redux';
 import productReducer, * as fromProducts from './products';
 import productFilterReducer from './productFilter';
 import cartReducer, * as fromCart from './cart'
+import authReducer from './auth'
 
 export default combineReducers({
    products: productReducer,
    productFilter: productFilterReducer,
-   cart: cartReducer
+   cart: cartReducer,
+   user: authReducer,
 })
 
 export const getFilteredProducts = (state, filter) => {
