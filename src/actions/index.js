@@ -12,7 +12,8 @@ import {
    CLEAR_CART_SUCCESS,
    START_AUTH,
    AUTH_SUCCESS,
-   AUTH_FAIL
+   AUTH_FAIL,
+   AUTH_LOGOUT,
 } from '../constants/ActionTypes'
 
 import { setAuthorizationHeader } from '../services/api'
@@ -177,6 +178,16 @@ export const authFail = (error) => ({
    error
 })
 
+export const logout = () => {
+   // remove token from header
+   setAuthorizationHeader(false);
+   // remove token and user details from localStorage
+   localStorage.clear();
+   return {
+      type: AUTH_LOGOUT
+   }
+}
+
 export const auth = (email, password, isLogin, name) => {
    return async function (dispatch) {
       try {
@@ -214,7 +225,6 @@ export const auth = (email, password, isLogin, name) => {
 }
 
 export const tryAutoSignin = () => {
-   console.log("dmv dvv");
    return function (dispatch) {
       const token = localStorage.getItem('jwtToken');
       const name = localStorage.getItem('name');
@@ -223,7 +233,6 @@ export const tryAutoSignin = () => {
          // set token in Authorization header so that it can be used
          // for sending further requests
          setAuthorizationHeader(token)
-         console.log("dkvfv")
          dispatch(authSuccess({name, email}))         
       }
    }
