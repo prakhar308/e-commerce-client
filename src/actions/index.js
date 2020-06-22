@@ -15,6 +15,8 @@ import {
    AUTH_FAIL
 } from '../constants/ActionTypes'
 
+import { setAuthorizationHeader } from '../services/api'
+
 export const fetchProductsSuccess = (products) => ({
    type: FETCH_PRODUCTS_SUCCESS,
    products
@@ -180,6 +182,7 @@ export const auth = (email, password, isLogin, name) => {
       try {
          // set loading to true
          dispatch(startAuth());
+         
          let url = "/api/users/login"
          let data = { email, password }
          // check if login or signup
@@ -188,15 +191,24 @@ export const auth = (email, password, isLogin, name) => {
             url = "/api/users"
             data = {...data, name }
          }
+         
          // send api request for authentication 
          let user = await axios.post(url, data);
+         
          const { token, ...userDetails } = user.data;
-         // store token in LocalStorage
+         // store name, email, token in localStorage
+         localStorage.setItem("name", name)
+         localStorage.setItem("email", email);
          localStorage.setItem("jwtToken", token);
-         // set current user in store
-         dispatch(authSuccess(userDetails))
+
+         // also save name and email in redux store and
+         // set isAuthenticated to true by dispatching authSuccess
+         dispatch(authSuccess({name, email}))
+
+         // set Authorization header for further requests
+         setAuthorizationHeader(token)
       } catch (e) {
-         dispatch(authFail(e))
+         dispatch(authFail(e.response.data.error))
       }
    }
 }

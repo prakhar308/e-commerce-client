@@ -6,9 +6,10 @@ import {
 
 const initialState = {
    loading: false,
-   user: {},
-   error: null,
+   name: null,
+   email: null,
    isAuthenticated: false,
+   error: null,
 }
 
 const startAuth = (state, action) => ({
@@ -18,7 +19,8 @@ const startAuth = (state, action) => ({
 
 const authSuccess = (state, action) => ({
    ...state,
-   user: action.user,
+   name: action.user.name,
+   email: action.user.email,
    isAuthenticated: true,
    loading: false,
 })
