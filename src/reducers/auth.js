@@ -24,6 +24,7 @@ const authSuccess = (state, action) => ({
    email: action.user.email,
    isAuthenticated: true,
    loading: false,
+   error: null,
 })
 
 const authFail = (state, action) => ({
