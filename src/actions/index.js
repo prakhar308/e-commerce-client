@@ -208,13 +208,16 @@ export const auth = (email, password, isLogin, name) => {
          
          const { token, ...userDetails } = user.data;
          // store name, email, token in localStorage
-         localStorage.setItem("name", name)
-         localStorage.setItem("email", email);
+         localStorage.setItem("name", userDetails.user.name)
+         localStorage.setItem("email", userDetails.user.email);
          localStorage.setItem("jwtToken", token);
 
          // also save name and email in redux store and
          // set isAuthenticated to true by dispatching authSuccess
-         dispatch(authSuccess({name, email}))
+         dispatch(authSuccess({
+            name: userDetails.user.name,
+            email: userDetails.user.email,
+         }))
 
          // set Authorization header for further requests
          setAuthorizationHeader(token)
