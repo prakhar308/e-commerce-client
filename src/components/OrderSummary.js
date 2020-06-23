@@ -20,8 +20,4 @@ const OrderSummary = (props) => {
    )
 }
 
-const mapStateToProps = state => ({
-   cart: state.cart
-})
-
-export default connect(mapStateToProps)(OrderSummary);
+export default OrderSummary;
