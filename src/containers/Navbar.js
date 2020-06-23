@@ -5,12 +5,6 @@ import { connect } from 'react-redux';
 import { logout } from '../actions/'
  
 class Navbar extends Component {
-   componentDidMount() {
-      console.log("inside Navbar CDM")
-   }
-   componentDidUpdate() {
-      console.log("inside Navbar CDU")
-   }
    render() {
       return (
          <div>
