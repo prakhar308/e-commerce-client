@@ -7,6 +7,7 @@ import Cart from '../containers/Cart'
 import { tryAutoSignin } from  '../actions/'
 import Navbar from '../containers/Navbar' 
 import AuthForm from '../containers/AuthForm'
+import Checkout from '../containers/Checkout'
 
 class App extends Component {
    componentDidMount() {
@@ -17,6 +18,7 @@ class App extends Component {
          <div>
             <Navbar />
             <Switch>
+               <Route path="/checkout" component={Checkout} />
                <Route path="/login" component={AuthForm} />
                <Route path="/cart" component={Cart} />
                <Route path="/" component={HomePage} />
