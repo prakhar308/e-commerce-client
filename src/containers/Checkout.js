@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import AddressForm from '../containers/AddressForm'
 import OrderSummary from '../components/OrderSummary'
 import { fetchCart } from '../actions/';
+import withAuthenticate from '../HOC/withAuthenticate'
 
 class Checkout extends Component {
    componentDidMount() {
@@ -34,4 +35,4 @@ const mapDispatchToProps = dispatch => ({
    fetchCart: () => dispatch(fetchCart()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
+export default connect(mapStateToProps, mapDispatchToProps)(withAuthenticate(Checkout));
