@@ -13,12 +13,17 @@ const initialState = {
 const placeOrderStart = (state, action) => ({
    ...state,
    loading: true,
+   purchased: false,
 })
 
 const placeOrderSuccess = (state, action) => ({
    ...state,
    loading: false,
    purchased: true,
+   orders: [
+      ...state.orders,
+      action.placedOrder,
+   ]
 })
 
 const placeOrderFail = (state, action) => ({
