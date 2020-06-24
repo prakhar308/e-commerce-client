@@ -1,6 +1,9 @@
 export {
-   fetchProducts,
    setProductFilter,
+} from './productFilter';
+
+export {
+   fetchProducts,
 } from './products.js';
 
 export {
