@@ -3,7 +3,13 @@ import {
    PLACE_ORDER_START,
    PLACE_ORDER_SUCCESS,
    PLACE_ORDER_FAIL,
+   INIT_PURCHASE,
 } from '../constants/ActionTypes'
+
+// set purchased field in order state to false
+export const initPurchase = () => ({
+   type: INIT_PURCHASE,
+})
 
 export const placeOrderStart = () => ({
    type: PLACE_ORDER_START

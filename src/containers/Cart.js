@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import CartItem from '../components/CartItem';
 import {
+   initPurchase,
    fetchCart,
    addToCart,
    updateCart,
@@ -14,6 +15,7 @@ import {
 class Cart extends Component {
    componentDidMount() {
       this.props.fetchCart();
+      this.props.initPurchase();
    }
 
    render() {
@@ -62,6 +64,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+   initPurchase: () => dispatch(initPurchase()),
    fetchCart: () => dispatch(fetchCart()),
    addToCart: (productId, qty) => dispatch(addToCart(productId, qty)),
    updateCart: (productId, qty) => dispatch(updateCart(productId, qty)),

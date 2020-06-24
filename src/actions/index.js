@@ -20,4 +20,5 @@ export {
 
 export {
    placeOrder,
+   initPurchase,
 } from './order'
