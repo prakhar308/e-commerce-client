@@ -9,8 +9,9 @@ export const placeOrderStart = () => ({
    type: PLACE_ORDER_START
 })
 
-export const placeOrderSuccess = () => ({
-   type: PLACE_ORDER_SUCCESS
+export const placeOrderSuccess = (placedOrder) => ({
+   type: PLACE_ORDER_SUCCESS,
+   placedOrder
 })
 
 export const placeOrderFail = () => ({
@@ -29,9 +30,9 @@ export const placeOrder = (address, cart) => {
          // set loading to true
          dispatch(placeOrderStart())
          // send api request to place the order
-         await axios.post("/api/orders", order)
+         const placedOrder = await axios.post("/api/orders", order)
          // 
-         dispatch(placeOrderSuccess())
+         dispatch(placeOrderSuccess(placedOrder.data))
       } catch (e) {
          dispatch(placeOrderFail());
       }
