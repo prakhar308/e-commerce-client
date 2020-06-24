@@ -48,7 +48,7 @@ class AddressForm extends Component {
                <input
                   type="text"
                   id="locality"
-                  name="loaclity"
+                  name="locality"
                   placeholder="Line 2 - locality"
                   value={locality}
                   onChange={this.handleChange}
