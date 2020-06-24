@@ -3,12 +3,14 @@ import productReducer, * as fromProducts from './products';
 import productFilterReducer from './productFilter';
 import cartReducer, * as fromCart from './cart'
 import authReducer from './auth'
+import orderReducer from './order'
 
 export default combineReducers({
    products: productReducer,
    productFilter: productFilterReducer,
    cart: cartReducer,
    user: authReducer,
+   order: orderReducer,
 })
 
 export const getFilteredProducts = (state, filter) => {

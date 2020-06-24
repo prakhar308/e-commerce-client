@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { placeOrder } from '../actions/';
 
 class AddressForm extends Component {
    constructor(props) {
@@ -18,7 +21,9 @@ class AddressForm extends Component {
 
    handleSubmit = e => {
       e.preventDefault();
-
+      const { onPlaceOrder, cart } = this.props;
+      const address = this.state;
+      onPlaceOrder(address, cart);
    }
 
    render() {
@@ -79,4 +84,12 @@ class AddressForm extends Component {
    }
 }
 
-export default AddressForm;
+const mapStateToProps = state => ({
+   cart: state.cart,
+}) 
+
+const mapDispatchToProps = dispatch => ({
+   onPlaceOrder: (address, cart) => dispatch(placeOrder(address, cart))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddressForm);

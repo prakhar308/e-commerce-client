@@ -17,3 +17,7 @@ export {
    tryAutoSignin,
 } from './auth.js'
 
+
+export {
+   placeOrder,
+} from './order'
