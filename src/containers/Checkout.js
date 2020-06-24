@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import AddressForm from '../containers/AddressForm'
 import OrderSummary from '../components/OrderSummary'
@@ -12,8 +13,10 @@ class Checkout extends Component {
 
    render() {
       const { cart } = this.props;
+      const purchased = this.props.order.purchased;
       return (
          <div>
+            { purchased ? <Redirect to="/order-confirmed" /> : null }
             <h1>Shipping</h1>
             <AddressForm />
             <OrderSummary cart={cart}/>
@@ -24,6 +27,7 @@ class Checkout extends Component {
 
 const mapStateToProps = state => ({
    cart: state.cart,
+   order: state.order,
 })
 
 const mapDispatchToProps = dispatch => ({

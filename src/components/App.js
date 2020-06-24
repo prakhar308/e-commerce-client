@@ -8,6 +8,7 @@ import { tryAutoSignin } from  '../actions/'
 import Navbar from '../containers/Navbar' 
 import AuthForm from '../containers/AuthForm'
 import Checkout from '../containers/Checkout'
+import OrderConfirmed from '../containers/OrderConfirmed'
 
 class App extends Component {
    componentDidMount() {
@@ -18,6 +19,7 @@ class App extends Component {
          <div>
             <Navbar />
             <Switch>
+               <Route path="/order-confirmed" component={OrderConfirmed} />
                <Route path="/checkout" component={Checkout} />
                <Route path="/login" component={AuthForm} />
                <Route path="/cart" component={Cart} />
