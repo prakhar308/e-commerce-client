@@ -1,4 +1,8 @@
 export {
+   setProductFilter
+} from './productFilter';
+
+export {
    fetchProducts,
    setProductFilter,
 } from './products.js';

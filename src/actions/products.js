@@ -2,7 +2,6 @@ import axios from 'axios';
 import {
    FETCH_PRODUCTS_SUCCESS,
    FETCH_PRODUCTS_FAILURE,
-   SET_PRODUCT_FILTER,
 } from '../constants/ActionTypes'
 
 export const fetchProductsSuccess = (products) => ({
@@ -29,8 +28,3 @@ export const fetchProducts = () => {
       }
    }
 }
-
-export const setProductFilter = (filter) => ({
-   type: SET_PRODUCT_FILTER,
-   filter
-})
