@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 
-import CartItem from '../components/CartItem';
+import classes from './Cart.module.css' 
+
+import CartItem from '../../components/CartItem/CartItem';
 import {
    initPurchase,
    fetchCart,
@@ -10,7 +12,7 @@ import {
    updateCart,
    removeFromCart,
    clearCart 
-} from '../actions/'
+} from '../../actions/'
 
 class Cart extends Component {
    componentDidMount() {
@@ -35,22 +37,38 @@ class Cart extends Component {
       )
 
       return (
-         <div>
-            <p>You have {cartItems.length}
-               {cartItems.length === 1 ? ' item' : ' items'} in cart
-            </p>
-            <button
-               disabled={cartItems.length === 0 ? true: false}
-               onClick={this.props.clearCart}>
-               Clear Shopping Cart
-            </button>
+         <div className={classes.Cart}>
+            
+            <div className={classes.CartDetails}>
+               <h3>You have {cartItems.length}
+               {cartItems.length === 1 ? ' item' : ' items'} in cart</h3>
+               <button
+                  disabled={cartItems.length === 0 ? true: false}
+                  onClick={this.props.clearCart}>
+                  Clear Shopping Cart
+               </button>
+            </div>
+
+            <div className={classes.CartHeading}>
+               <h2></h2>
+               <h2>Product</h2>
+               <h2>Quantity</h2>
+               <h2>Price</h2>
+            </div>
+
             {
                isEmpty
                   ? (loading ? <h1>Loading...</h1> : <h1>Wow so empty</h1>)
                   : cart
             }
-            <p>Total price: <strong>{totalPrice}</strong></p>
-            <Link to="/checkout">Checkout</Link>
+
+            <div className={classes.TotalPrice}>
+               <h3>Total price: <strong>{totalPrice}</strong></h3>
+            </div>
+
+            <div className={classes.Checkout}>
+               <button><Link to="/checkout">Checkout</Link></button>
+            </div>
          </div>
       )
    }

@@ -1,0 +1,72 @@
+.Cart {
+    border: 2px solid lightgray;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin: 20px 100px;
+}
+
+.Cart div {
+   border: 1px solid lightgray;
+   width: 100%;
+   padding: 20px;
+}
+
+/*Cart deatils styling*/
+.CartDetails {
+   display: flex;
+   justify-content: space-between;
+}
+
+.CartDetails button {
+   cursor: pointer;
+   margin: 10px;
+   padding: 10px;
+   border: none;
+   border-radius: 4px;
+   text-align: center;
+   font-size: 19px;
+   font-weight: 200;
+}
+
+/*Cart heading styling*/
+.CartHeading {
+   display: flex;
+   justify-content: space-around;
+}
+
+.CartHeading * {
+   flex-basis: 25%;
+}
+
+/*totalPrice styling*/
+
+.TotalPrice {
+   display: flex;
+   justify-content: flex-end;
+}
+
+.TotalPrice * {
+   flex-basis: 25%;
+   text-align: center;
+}
+
+/*checkout styling*/
+
+.Checkout {
+   display: flex;
+   justify-content: flex-start;
+}
+
+.Checkout button {
+   cursor: pointer;
+   margin: 10px;
+   padding: 10px;
+   background-color: #d1e231;
+   border: none;
+   border-radius: 4px;
+   text-align: center;
+   font-size: 19px;
+   font-weight: 600;
+   color: #FFF;
+}

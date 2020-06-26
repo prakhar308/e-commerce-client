@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import HomePage from './HomePage/HomePage';
-import Cart from '../containers/Cart'
+import Cart from '../containers/Cart/Cart'
 import { tryAutoSignin } from  '../actions/'
 import Navbar from '../containers/Navbar/Navbar' 
 import AuthForm from '../containers/AuthForm'
