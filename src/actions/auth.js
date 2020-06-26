@@ -3,10 +3,11 @@ import {
    START_AUTH,
    AUTH_SUCCESS,
    AUTH_FAIL,
-   AUTH_LOGOUT,
+   AUTH_LOGOUT_SUCCESS,
 } from '../constants/ActionTypes'
 
 import { setAuthorizationHeader } from '../services/api'
+import { clearCartSuccess } from './cart'
 
 // AUTH ACTIONS
 export const startAuth = () => ({
@@ -23,13 +24,28 @@ export const authFail = (error) => ({
    error
 })
 
+export const authLogoutSuccess = () => ({
+   type: AUTH_LOGOUT_SUCCESS,
+})
+
 export const logout = () => {
-   // remove token from header
-   setAuthorizationHeader(false);
-   // remove token and user details from localStorage
-   localStorage.clear();
-   return {
-      type: AUTH_LOGOUT
+   return async function (dispatch) {
+      try {
+         // send api request to logout the user.
+         // this will delete the token from db
+         // beacause we are also storing the token in db
+         await axios.get("/api/users/logout");
+         // remove token from header
+         setAuthorizationHeader(false);
+         // remove token and user details from localStorage
+         localStorage.clear();
+         // update user details in store
+         dispatch(authLogoutSuccess());
+         // clear cart
+         dispatch(clearCartSuccess());
+      } catch (e) {
+
+      }
    }
 }
 

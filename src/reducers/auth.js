@@ -2,7 +2,7 @@ import {
    START_AUTH,
    AUTH_SUCCESS,
    AUTH_FAIL,
-   AUTH_LOGOUT,
+   AUTH_LOGOUT_SUCCESS,
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -33,7 +33,7 @@ const authFail = (state, action) => ({
    loading: false,
 })
 
-const authLogout = (state, action) => ({
+const authLogoutSuccess = (state, action) => ({
    ...state,
    name: null,
    email: null,
@@ -45,7 +45,7 @@ const authReducer = (state = initialState, action) => {
       case START_AUTH: return startAuth(state, action);
       case AUTH_SUCCESS: return authSuccess(state, action);
       case AUTH_FAIL: return authFail(state, action);
-      case AUTH_LOGOUT: return authLogout(state, action);
+      case AUTH_LOGOUT_SUCCESS: return authLogoutSuccess(state, action);
       default: return state
    }
 }
