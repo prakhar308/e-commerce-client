@@ -3,3 +3,10 @@
    display: flex;
    flex-direction: row;
 }
+
+@media (max-width: 650px) {
+   .HomePage {
+      display: flex;
+      flex-direction: column;
+   }
+}
