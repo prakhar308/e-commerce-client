@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import HomePage from './HomePage';
 import Cart from '../containers/Cart'
 import { tryAutoSignin } from  '../actions/'
-import Navbar from '../containers/Navbar' 
+import Navbar from '../containers/Navbar/Navbar' 
 import AuthForm from '../containers/AuthForm'
 import Checkout from '../containers/Checkout'
 import OrderConfirmed from '../containers/OrderConfirmed'
