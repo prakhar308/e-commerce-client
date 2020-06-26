@@ -1,8 +1,12 @@
 import React from 'react';
 
-const Filter = ({ filter, onClick }) => {
+import classes from '../containers/ProductFilters/ProductFilters.module.css'
+
+const Filter = ({ filter, active, onClick }) => {
    return (
-      <button onClick={onClick}>
+      <button 
+         className={active ? classes.activeFilter : null}
+         onClick={onClick}>
          {filter}
       </button>
    )
