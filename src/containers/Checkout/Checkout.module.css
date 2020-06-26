@@ -1,0 +1,60 @@
+.Checkout {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   max-height: 500px;
+   margin: 40px;
+}
+
+.AddressForm {
+   flex: 0 1 30%;
+}
+
+.AddressForm form {
+   display: flex;
+   flex-direction: column;
+   border: 1px solid lightgray;
+   border-radius: 4px;
+   margin: 20px;
+}
+
+.AddressFrom input {
+   background-color: #e8eeef;
+   border: none;
+   border-radius: 4px; 
+   outline: none;
+   height: 30px;
+   flex-wrap: wrap;
+   padding: 15px;
+   margin: 5px;
+   font-size: 15px;
+}
+
+.AddressForm button {
+   flex-wrap: wrap;
+   cursor: pointer;
+   margin: 10px;
+   padding: 10px;
+   background-color: #d1e231;
+   border: none;
+   border-radius: 4px;
+   text-align: center;
+   font-size: 19px;
+   font-weight: 600;
+   color: #FFF;
+}
+
+.OrderSummary {
+   display: flex;
+   flex-direction: column;
+   border: 1px solid lightgray;
+   border-radius: 4px;
+   flex: 0 1 80%;
+   margin: 20px;
+   padding: 20px;
+}
+
+.CartItem {
+   display: flex;
+   justify-content: space-between;
+}

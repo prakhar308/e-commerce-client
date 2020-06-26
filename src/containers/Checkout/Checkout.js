@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import AddressForm from '../containers/AddressForm'
-import OrderSummary from '../components/OrderSummary'
-import { fetchCart } from '../actions/';
-import withAuthenticate from '../HOC/withAuthenticate'
+import AddressForm from '../../containers/AddressForm'
+import OrderSummary from '../../components/OrderSummary'
+import { fetchCart } from '../../actions/';
+import withAuthenticate from '../../HOC/withAuthenticate'
+
+import classes from './Checkout.module.css'
 
 class Checkout extends Component {
    componentDidMount() {
@@ -17,10 +19,12 @@ class Checkout extends Component {
       const purchased = this.props.order.purchased;
       return (
          <div>
-            { purchased ? <Redirect to="/order-confirmed" /> : null }
             <h1>Shipping</h1>
-            <AddressForm />
-            <OrderSummary cart={cart}/>
+            <div className={classes.Checkout}>
+               { purchased ? <Redirect to="/order-confirmed" /> : null }
+               <AddressForm />
+               <OrderSummary cart={cart}/>
+            </div>
          </div>
       )
    }

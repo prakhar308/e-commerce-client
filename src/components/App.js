@@ -6,8 +6,8 @@ import HomePage from './HomePage/HomePage';
 import Cart from '../containers/Cart/Cart'
 import { tryAutoSignin } from  '../actions/'
 import Navbar from '../containers/Navbar/Navbar' 
-import AuthForm from '../containers/AuthForm'
-import Checkout from '../containers/Checkout'
+import AuthForm from '../containers/AuthForm/AuthForm'
+import Checkout from '../containers/Checkout/Checkout'
 import OrderConfirmed from '../containers/OrderConfirmed'
 
 class App extends Component {

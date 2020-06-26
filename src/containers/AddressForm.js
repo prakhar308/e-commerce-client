@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { placeOrder } from '../actions/';
+import classes from './Checkout/Checkout.module.css'
 
 class AddressForm extends Component {
    constructor(props) {
@@ -29,7 +30,7 @@ class AddressForm extends Component {
    render() {
       const { name, street, locality, city, pincode } = this.state;
       return (
-         <div>
+         <div className={classes.AddressForm}>
             <form onSubmit={this.handleSubmit}>
                <label htmlFor="name">Name</label>
                <input
