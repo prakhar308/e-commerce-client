@@ -67,7 +67,11 @@ class Cart extends Component {
             </div>
 
             <div className={classes.Checkout}>
-               <button><Link to="/checkout">Checkout</Link></button>
+               {
+                  cartItems.length === 0
+                  ? <span>Checkout</span>
+                  : <button><Link to="/checkout">Checkout</Link></button>
+               }
             </div>
          </div>
       )
