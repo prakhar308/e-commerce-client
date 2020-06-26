@@ -1,5 +1,6 @@
 import React from 'react';
-import CartOperationsButton from './CartOperationsButton'
+import CartOperationsButton from '../CartOperationsButton/CartOperationsButton'
+import classes from './Product.module.css'
 
 const Product = ({
    name,
@@ -9,13 +10,13 @@ const Product = ({
    cartQty,
    onAddToCart,
    onUpdateCart,
-   onRemoveCart
+   onRemoveCart,
 }) => {
    return (
-      <div>
+      <div className={classes.Product}>
          <img src={img} alt="product_image"/>
-         <h3>{name}</h3>
-         <h4>{price}</h4>
+         <h2>{name}</h2>
+         <h3>{price}</h3>
          <p>{description}</p>
          <CartOperationsButton 
             qty={cartQty}

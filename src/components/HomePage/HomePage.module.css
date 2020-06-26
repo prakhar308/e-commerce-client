@@ -1,0 +1,5 @@
+/*HomePage Styles*/
+.HomePage {
+   display: flex;
+   flex-direction: row;
+}

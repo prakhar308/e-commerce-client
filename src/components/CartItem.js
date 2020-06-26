@@ -1,5 +1,5 @@
 import React from 'react';
-import CartOperationsButton from './CartOperationsButton';
+import CartOperationsButton from './CartOperationsButton/CartOperationsButton';
 
 const CartItem = ({
    img,

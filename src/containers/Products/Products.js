@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchProducts, addToCart, updateCart, removeFromCart, fetchCart } from '../actions/'
-import { getFilteredProducts, getProductQuantity } from '../reducers/'
-import Product from '../components/Product'
+import {
+   fetchProducts,
+   addToCart,
+   updateCart,
+   removeFromCart,
+   fetchCart
+} from '../../actions/'
+import { getFilteredProducts, getProductQuantity } from '../../reducers/'
+import Product from '../../components/Product/Product'
+import classes from './Products.module.css'
 
 class Products extends Component {
    componentDidMount() {
@@ -27,7 +34,9 @@ class Products extends Component {
          ))
       }
       return (
-         products
+         <div className={classes.Products}>
+            {products}
+         </div>
       )
    }
 }
