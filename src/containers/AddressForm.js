@@ -37,6 +37,7 @@ class AddressForm extends Component {
                   type="text"
                   id="name"
                   name="name"
+                  required={true}
                   value={name}
                   onChange={this.handleChange}
                />
@@ -46,6 +47,7 @@ class AddressForm extends Component {
                   type="text"
                   id="street"
                   name="street"
+                  required={true}
                   placeholder="Line 1 - street"
                   value={street}
                   onChange={this.handleChange}
@@ -55,6 +57,7 @@ class AddressForm extends Component {
                   type="text"
                   id="locality"
                   name="locality"
+                  required={true}
                   placeholder="Line 2 - locality"
                   value={locality}
                   onChange={this.handleChange}
@@ -65,6 +68,7 @@ class AddressForm extends Component {
                   type="text"
                   id="city"
                   name="city"
+                  required={true}
                   value={city}
                   onChange={this.handleChange}
                />
@@ -74,6 +78,7 @@ class AddressForm extends Component {
                   type="text"
                   id="pincode"
                   name="pincode"
+                  required={true}
                   value={pincode}
                   onChange={this.handleChange}
                />

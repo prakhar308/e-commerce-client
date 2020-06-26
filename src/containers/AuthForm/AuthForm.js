@@ -57,6 +57,7 @@ class AuthForm extends Component {
                   <input
                      type="text"
                      name="name"
+                     required={true}
                      placeholder="Enter Name"
                      value={name}
                      onChange={this.handleChange}
@@ -65,6 +66,7 @@ class AuthForm extends Component {
                <input
                   type="text"
                   name="email"
+                  required={true}
                   placeholder="Enter Email"
                   value={email}
                   onChange={this.handleChange}
@@ -72,6 +74,7 @@ class AuthForm extends Component {
                <input
                   type="password"
                   name="password"
+                  required={true}
                   placeholder="Enter Password"
                   value={password}
                   onChange={this.handleChange}
