@@ -122,6 +122,8 @@ export const getProductQuantity = (state, productId) => {
          return foundProduct.qty;
       else
          return 0;
+   } else {
+      return 0;
    }
 }
 
