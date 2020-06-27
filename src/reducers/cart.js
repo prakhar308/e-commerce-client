@@ -9,7 +9,7 @@ import {
 } from '../constants/ActionTypes'
 
 const initialState = {
-   cart: [],
+   cart: null,
    totalPrice: 0,
    loading: false,
    error: null
@@ -56,7 +56,7 @@ const removeCart = (state, action) => ({
 
 const clearCart = (state, action) => ({
    ...state,
-   cart: [],
+   cart: null,
    loading: false,
    totalPrice: 0
 })
@@ -115,12 +115,14 @@ const cartReducer = (state = initialState, action) => {
 }
 
 export const getProductQuantity = (state, productId) => {
-   const foundProduct = state.find((prod) => prod._id === productId)
-   
-   if(foundProduct)
-      return foundProduct.qty;
-   else
-      return 0;
+   if (state){
+      const foundProduct = state.find((prod) => prod._id === productId)
+      
+      if(foundProduct)
+         return foundProduct.qty;
+      else
+         return 0;
+   }
 }
 
 export default cartReducer;

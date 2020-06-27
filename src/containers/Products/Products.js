@@ -6,7 +6,7 @@ import {
    addToCart,
    updateCart,
    removeFromCart,
-   fetchCart
+   fetchCartIfNeeded
 } from '../../actions/'
 import { getFilteredProducts, getProductQuantity } from '../../reducers/'
 import Product from '../../components/Product/Product'
@@ -14,8 +14,10 @@ import classes from './Products.module.css'
 
 class Products extends Component {
    componentDidMount() {
-      this.props.fetchCart();
       this.props.fetchProducts();
+      if (this.props.isAuthenticated) {
+         this.props.fetchCartIfNeeded();
+      }
    }
 
    render() {
@@ -42,6 +44,7 @@ class Products extends Component {
 }
 
 const mapStateToProps = state => ({
+   isAuthenticated: state.user.isAuthenticated,
    products: getFilteredProducts(state, state.productFilter),
    getProductQuantity: (e) => getProductQuantity(state, e)
 })
@@ -51,7 +54,7 @@ const mapDispatchToProps = dispatch => ({
    addToCart: (productId, qty) => dispatch(addToCart(productId, qty)),
    updateCart: (productId, qty) => dispatch(updateCart(productId, qty)),
    removeFromCart: (productId) => dispatch(removeFromCart(productId)),
-   fetchCart: () => dispatch(fetchCart())
+   fetchCartIfNeeded: () => dispatch(fetchCartIfNeeded())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

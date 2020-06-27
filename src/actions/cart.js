@@ -107,6 +107,18 @@ export const fetchCart = () => {
    }
 }
 
+export const fetchCartIfNeeded = () => {
+   return function (dispatch, getState) {
+      const cart = getState().cart;
+      if (!cart.cart){
+         return dispatch(fetchCart())
+      } else {
+         return Promise.resolve();
+      }
+   }
+} 
+
+
 export const clearCart = () => {
    return async function (dispatch) {
       try {

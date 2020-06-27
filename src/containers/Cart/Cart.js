@@ -7,7 +7,7 @@ import classes from './Cart.module.css'
 import CartItem from '../../components/CartItem/CartItem';
 import {
    initPurchase,
-   fetchCart,
+   fetchCartIfNeeded,
    addToCart,
    updateCart,
    removeFromCart,
@@ -16,7 +16,9 @@ import {
 
 class Cart extends Component {
    componentDidMount() {
-      this.props.fetchCart();
+      if (this.props.isAuthenticated) {
+         this.props.fetchCartIfNeeded();
+      }
       this.props.initPurchase();
    }
 
@@ -79,7 +81,8 @@ class Cart extends Component {
 }
 
 const mapStateToProps = state => ({
-   cartItems: state.cart.cart,
+   isAuthenticated: state.user.isAuthenticated,
+   cartItems: state.cart.cart || [],
    loading: state.cart.loading,
    error: state.cart.error,
    totalPrice: state.cart.totalPrice,
@@ -87,7 +90,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
    initPurchase: () => dispatch(initPurchase()),
-   fetchCart: () => dispatch(fetchCart()),
+   fetchCartIfNeeded: () => dispatch(fetchCartIfNeeded()),
    addToCart: (productId, qty) => dispatch(addToCart(productId, qty)),
    updateCart: (productId, qty) => dispatch(updateCart(productId, qty)),
    removeFromCart: (productId) => dispatch(removeFromCart(productId)),

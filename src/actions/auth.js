@@ -7,7 +7,7 @@ import {
 } from '../constants/ActionTypes'
 
 import { setAuthorizationHeader } from '../services/api'
-import { clearCartSuccess } from './cart'
+import { clearCartSuccess, fetchCartIfNeeded } from './cart'
 
 // AUTH ACTIONS
 export const startAuth = () => ({
@@ -73,15 +73,15 @@ export const auth = (email, password, isLogin, name) => {
          localStorage.setItem("email", userDetails.user.email);
          localStorage.setItem("jwtToken", token);
 
+         // set Authorization header for further requests
+         setAuthorizationHeader(token)
+
          // also save name and email in redux store and
          // set isAuthenticated to true by dispatching authSuccess
          dispatch(authSuccess({
             name: userDetails.user.name,
             email: userDetails.user.email,
          }))
-
-         // set Authorization header for further requests
-         setAuthorizationHeader(token)
       } catch (e) {
          dispatch(authFail(e.response.data.error))
       }
@@ -89,7 +89,7 @@ export const auth = (email, password, isLogin, name) => {
 }
 
 export const tryAutoSignin = () => {
-   return function (dispatch) {
+   return async function (dispatch) {
       const token = localStorage.getItem('jwtToken');
       const name = localStorage.getItem('name');
       const email = localStorage.getItem('email');
@@ -97,7 +97,9 @@ export const tryAutoSignin = () => {
          // set token in Authorization header so that it can be used
          // for sending further requests
          setAuthorizationHeader(token)
-         dispatch(authSuccess({name, email}))         
+         dispatch(authSuccess({name, email}))
+         // also fetch cart
+         await dispatch(fetchCartIfNeeded());
       }
    }
 }

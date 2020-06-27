@@ -4,14 +4,14 @@ import { Redirect } from 'react-router-dom';
 
 import AddressForm from '../../containers/AddressForm'
 import OrderSummary from '../../components/OrderSummary'
-import { fetchCart } from '../../actions/';
+import { fetchCartIfNeeded } from '../../actions/';
 import withAuthenticate from '../../HOC/withAuthenticate'
 
 import classes from './Checkout.module.css'
 
 class Checkout extends Component {
    componentDidMount() {
-      this.props.fetchCart();
+      this.props.fetchCartIfNeeded();
    }
 
    render() {
@@ -36,7 +36,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-   fetchCart: () => dispatch(fetchCart()),
+   fetchCartIfNeeded: () => dispatch(fetchCartIfNeeded()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withAuthenticate(Checkout));

@@ -10,7 +10,7 @@ export {
    addToCart,
    updateCart,
    removeFromCart,
-   fetchCart,
+   fetchCartIfNeeded,
    clearCart
 } from './cart.js'
 
