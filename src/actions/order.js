@@ -6,6 +6,8 @@ import {
    INIT_PURCHASE,
 } from '../constants/ActionTypes'
 
+import { clearCartSuccess } from './cart'
+
 // set purchased field in order state to false
 export const initPurchase = () => ({
    type: INIT_PURCHASE,
@@ -37,8 +39,10 @@ export const placeOrder = (address, cart) => {
          dispatch(placeOrderStart())
          // send api request to place the order
          const placedOrder = await axios.post("/api/orders", order)
-         // 
+         // save order in store
          dispatch(placeOrderSuccess(placedOrder.data))
+         // clear cart
+          dispatch(clearCartSuccess());
       } catch (e) {
          dispatch(placeOrderFail());
       }
