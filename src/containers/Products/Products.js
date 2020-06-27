@@ -6,7 +6,8 @@ import {
    addToCart,
    updateCart,
    removeFromCart,
-   fetchCartIfNeeded
+   fetchCartIfNeeded,
+   removeError,
 } from '../../actions/'
 import { getFilteredProducts, getProductQuantity } from '../../reducers/'
 import Product from '../../components/Product/Product'
@@ -19,9 +20,11 @@ class Products extends Component {
       if (this.props.isAuthenticated) {
          this.props.fetchCartIfNeeded();
       }
+      this.props.removeError();
    }
 
    render() {
+      let error = this.props.error;
       let products = <Loader />
 
       if(this.props.products.length){
@@ -37,8 +40,11 @@ class Products extends Component {
          ))
       }
       return (
-         <div className={classes.Products}>
-            {products}
+         <div>
+            {error ? <div className={classes.error}>{error}</div> : null}
+            <div className={classes.Products}>
+               {products}
+            </div>
          </div>
       )
    }
@@ -47,7 +53,8 @@ class Products extends Component {
 const mapStateToProps = state => ({
    isAuthenticated: state.user.isAuthenticated,
    products: getFilteredProducts(state, state.productFilter),
-   getProductQuantity: (e) => getProductQuantity(state, e)
+   getProductQuantity: (e) => getProductQuantity(state, e),
+   error: state.error.message,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -55,7 +62,8 @@ const mapDispatchToProps = dispatch => ({
    addToCart: (productId, qty) => dispatch(addToCart(productId, qty)),
    updateCart: (productId, qty) => dispatch(updateCart(productId, qty)),
    removeFromCart: (productId) => dispatch(removeFromCart(productId)),
-   fetchCartIfNeeded: () => dispatch(fetchCartIfNeeded())
+   fetchCartIfNeeded: () => dispatch(fetchCartIfNeeded()),
+   removeError: () => dispatch(removeError()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

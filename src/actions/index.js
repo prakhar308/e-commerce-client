@@ -25,3 +25,8 @@ export {
    placeOrder,
    initPurchase,
 } from './order'
+
+export {
+   addError,
+   removeError,
+} from './error.js'

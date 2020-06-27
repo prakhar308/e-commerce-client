@@ -4,6 +4,7 @@ import productFilterReducer from './productFilter';
 import cartReducer, * as fromCart from './cart'
 import authReducer from './auth'
 import orderReducer from './order'
+import errorReducer from './error'
 
 export default combineReducers({
    products: productReducer,
@@ -11,6 +12,7 @@ export default combineReducers({
    cart: cartReducer,
    user: authReducer,
    order: orderReducer,
+   error: errorReducer,
 })
 
 export const getFilteredProducts = (state, filter) => {

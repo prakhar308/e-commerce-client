@@ -9,6 +9,8 @@ import {
    CLEAR_CART_SUCCESS,
 } from '../constants/ActionTypes'
 
+import { addError } from './error.js'
+
 export const startCartOperation = () => ({
    type: START_CART_OPERATION
 })
@@ -44,8 +46,12 @@ export const cartOperationFail = error => ({
 })
 
 export const addToCart = (productId, qty) => {
-   return async function(dispatch) {
+   return async function(dispatch, getState) {
       try {
+         const { isAuthenticated } = getState().user;
+         if (!isAuthenticated){
+            throw Error("Please login");
+         }
          // set loading to true
          dispatch(startCartOperation())
          // send api request
@@ -54,6 +60,7 @@ export const addToCart = (productId, qty) => {
          dispatch(addToCartSuccess(product.data))
       } catch (e) {
          // set error
+         dispatch(addError(e.message))
          dispatch(cartOperationFail(e.message))
       } 
    }
