@@ -2,11 +2,13 @@
 .HomePage {
    display: flex;
    flex-direction: row;
+   margin: 15px;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 950px) {
    .HomePage {
       display: flex;
       flex-direction: column;
+      margin: 50px;
    }
 }
