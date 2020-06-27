@@ -81,7 +81,7 @@ class AuthForm extends Component {
                   value={password}
                   onChange={this.handleChange}
                />
-               <button>SUBMIT</button>
+               <button className={classes.AuthSubmitButton}>SUBMIT</button>
             </form>
             {
                isLogin 
@@ -89,6 +89,7 @@ class AuthForm extends Component {
                      <div className={classes.AuthMode}>
                         <h2>New ?</h2> 
                         <button
+                           className={classes.AuthModeButton}
                            onClick={this.switchAuthMode}
                         >Create new account</button>
                      </div>
@@ -97,6 +98,7 @@ class AuthForm extends Component {
                      <div>
                         <h2>Already have an account</h2>
                         <button
+                           className={classes.AuthModeButton}
                            onClick={this.switchAuthMode}
                         >Login</button>
                      </div>
