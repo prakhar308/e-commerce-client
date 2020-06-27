@@ -14,6 +14,8 @@ import {
    clearCart 
 } from '../../actions/'
 
+import Loader from '../../components/Loader/Loader'
+
 class Cart extends Component {
    componentDidMount() {
       if (this.props.isAuthenticated) {
@@ -60,7 +62,7 @@ class Cart extends Component {
 
             {
                isEmpty
-                  ? (loading ? <h1>Loading...</h1> : <h1>Wow so empty</h1>)
+                  ? (loading ? <Loader />: <h1>Wow so empty</h1>)
                   : cart
             }
 

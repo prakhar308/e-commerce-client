@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 
 import { auth } from '../../actions/'
 import classes from './AuthForm.module.css'
+import Loader from '../../components/Loader/Loader'
 
 class AuthForm extends Component {
    constructor(props) {
@@ -34,7 +35,7 @@ class AuthForm extends Component {
 
    render() {
       const { email, password, isLogin, name } = this.state;
-      const { error, isAuthenticated } = this.props;
+      const { error, isAuthenticated, loading } = this.props;
 
       let authRedirect = null;
       // if user is already signedin then redirect user
@@ -49,6 +50,7 @@ class AuthForm extends Component {
 
       return (
          <div className={classes.AuthForm}>
+            {loading ? <Loader /> : null}
             {authRedirect}
             {errorMessage}
             <h1>{isLogin ? 'Login' : 'Signup'}</h1>

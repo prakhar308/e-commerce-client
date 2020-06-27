@@ -6,7 +6,7 @@ import AddressForm from '../../containers/AddressForm'
 import OrderSummary from '../../components/OrderSummary'
 import { fetchCartIfNeeded } from '../../actions/';
 import withAuthenticate from '../../HOC/withAuthenticate'
-
+import Loader from '../../components/Loader/Loader'
 import classes from './Checkout.module.css'
 
 class Checkout extends Component {
@@ -16,10 +16,11 @@ class Checkout extends Component {
 
    render() {
       const { cart } = this.props;
-      const purchased = this.props.order.purchased;
+      const { purchased, loading } = this.props.order;
       return (
          <div>
             <h1>Shipping</h1>
+            { loading ? <Loader /> : null}
             <div className={classes.Checkout}>
                { purchased ? <Redirect to="/order-confirmed" /> : null }
                <AddressForm />

@@ -11,6 +11,7 @@ import {
 import { getFilteredProducts, getProductQuantity } from '../../reducers/'
 import Product from '../../components/Product/Product'
 import classes from './Products.module.css'
+import Loader from '../../components/Loader/Loader'
 
 class Products extends Component {
    componentDidMount() {
@@ -21,7 +22,7 @@ class Products extends Component {
    }
 
    render() {
-      let products = <div>Loading...</div>
+      let products = <Loader />
 
       if(this.props.products.length){
          products = this.props.products.map((prod) => (
