@@ -10,8 +10,11 @@ const OrderConfirmed = (props) => {
             ?  (
                   <div>
                      Your Order has been placed successfully.
+                     <br/>
                      Date: {lastOrder.date}
+                     <br/>
                      Order id: {lastOrder._id}
+                     <br/>
                   </div>
                ) 
             : null
