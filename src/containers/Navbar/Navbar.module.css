@@ -22,18 +22,20 @@ header {
    justify-content: space-between;
    align-items: center;
    border-bottom: 2px solid lightgray;
-   padding: 15px; 
+   padding: 15px;
+   background-color: #d1e231;
 }
 
 header nav i {
    margin: 0 15px;
-   color: darkgray;
+   color: #303030;
 }
 
 header h2 {
    margin-right: 15px;
+   color: #303030;
 }
 
 header a {
-   color: darkgray;
+   color: #303030;
 }
